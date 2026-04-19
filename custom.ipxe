@@ -4,9 +4,16 @@
 ###
 
 :start
-echo Hello world!
-sleep 10
+menu Custom Boot Menu
+item --gap Linux distributions
+item cachyos_desktop ${space} CachyOS Desktop Linux 260308 ISO
+choose target && goto ${target} || goto custom_exit
 goto custom_exit
+
+:cachyos_desktop
+kernel https://boot.netboot.xyz/memdisk raw iso
+initrd https://mirror.cachyos.org/ISO/desktop/260308/cachyos-desktop-linux-260308.iso
+boot || goto custom_exit
 
 :custom_exit
 exit 0
